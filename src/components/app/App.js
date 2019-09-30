@@ -45,20 +45,15 @@ class App extends React.Component {
 
   SetSearchInputIntoState = (childData) => {
       this.setState({searchInput: childData})
-      console.log(this.state)
   }
   GetUrlOfClickedPokimonAndShowPokemonDetails = (childData) => {
-
       this.setState({
         ClickedUrl: childData,
         stateOfPokimonDetailsCard: true
       });
-
   }
   ClosePokimonDetailsCard = () => {
-
       this.setState({
-
         stateOfPokimonDetailsCard: false
       });
 

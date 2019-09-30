@@ -1,5 +1,6 @@
 import React from 'react';
 import PokiCard from '../pokiCard/PokiCard';
+
 class ContentTable extends React.Component {
 
     constructor(props){
