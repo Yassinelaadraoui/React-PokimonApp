@@ -1,19 +1,18 @@
 import React from 'react';
-
+import './PokiCard.css'
 function PokiCard(props){
 
   return(
-    <div className="card mb-3 pokicardParentDiv" >
-      <div className="row no-gutters">
-        <div className="col-md-4">
-          <img width="50px" src="https://miro.medium.com/max/1200/1*K0a7xINk0RM5gfXGSN68cw.png" className="card-img" alt="..." />
+    <div  onClick={()=>{ props.impelementState(props.url)} } className="card mb-3 pokicardParentDiv w3-card" >
+      <div className="w3-row no-gutters">
+        <div className="w3-col s3  w3-center">
+          <img width="100px" src="https://miro.medium.com/max/1200/1*K0a7xINk0RM5gfXGSN68cw.png" className="card-img" alt="..." />
         </div>
-        <div className="col-md-8">
-          <div className="card-body">
-            <h5 className="card-title">{props.name}</h5>
-            <p className="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            <p className="card-text"><small className="text-muted">Last updated 3 mins ago</small></p>
-          </div>
+        <div className="w3-col s3  w3-center">
+
+            <h2 className="card-title">{props.name}</h2>
+
+
         </div>
       </div>
     </div>

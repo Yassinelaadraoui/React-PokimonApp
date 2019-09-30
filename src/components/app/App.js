@@ -3,52 +3,76 @@ import logo from '../../logo.svg';
 import './App.css';
 import Header from '../header/Header';
 import ContentTable from '../contentTable/ContentTable';
-
+import PokimonDetailsCard from '../PokimonDetailsCard/PokimonDetailsCard';
+import Loading from '../loading/Loading';
 
 class App extends React.Component {
+
   constructor(props){
     super(props);
     this.state = {
       searchInput:'',
-      pokimons: []
+      pokimons: [],
+      stateOfPokimonDetailsCard : false,
+      ClickedUrl: ''
 
     };
+    this.urlToGetAllPokimons = "https://pokeapi.co/api/v2/pokemon/?limit=811";
   }
 
+  CallApi(Url){
+
+    fetch(Url)
+      .then(res => res.json())
+      .then(
+        (result) => {
+          this.setState({
+
+            pokimons: result.results
+          });
+
+        },
+
+        (error) => {
+          this.setState({error});
+        }
+      )
+  };
   componentDidMount() {
+    this.CallApi(this.urlToGetAllPokimons);
 
-   fetch("https://pokeapi.co/api/v2/pokemon/?limit=811")
-     .then(res => res.json())
-     .then(
-       (result) => {
-         this.setState({
-
-           pokimons: result.results
-         });
-
-       },
-       // Note: it's important to handle errors here
-       // instead of a catch() block so that we don't swallow
-       // exceptions from actual bugs in components.
-       (error) => {
-         this.setState({
-
-           error
-         });
-       }
-     )
   }
 
-  callbackFunction = (childData) => {
+  SetSearchInputIntoState = (childData) => {
       this.setState({searchInput: childData})
+      console.log(this.state)
+  }
+  GetUrlOfClickedPokimonAndShowPokemonDetails = (childData) => {
+
+      this.setState({
+        ClickedUrl: childData,
+        stateOfPokimonDetailsCard: true
+      });
+
+  }
+  ClosePokimonDetailsCard = () => {
+
+      this.setState({
+
+        stateOfPokimonDetailsCard: false
+      });
+
   }
 
   render() {
     return(
 
       <React.Fragment>
-          <Header searchInput={this.state.searchInput} parentCallback = {this.callbackFunction} />
-          <ContentTable  results={this.state.pokimons} />
+          <Header searchInput={this.state.searchInput} parentCallback = {this.SetSearchInputIntoState} />
+
+         { this.state.stateOfPokimonDetailsCard ?  <PokimonDetailsCard closeCard={this.ClosePokimonDetailsCard} ClickedUrl={this.state.ClickedUrl}  stateOfPokimonDetailsCard={this.state.stateOfPokimonDetailsCard}  /> : null }
+         { !this.state.stateOfPokimonDetailsCard ?  <ContentTable searchInput = {this.state.searchInput} parentCallback={this.GetUrlOfClickedPokimonAndShowPokemonDetails} results={this.state.pokimons}  /> : null }
+
       </React.Fragment>
     );
   }

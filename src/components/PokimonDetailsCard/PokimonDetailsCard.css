@@ -1,0 +1,27 @@
+.PokimonDetailsCard{
+  width: 60%;
+  height: 100%;
+
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  transition: 0.3s;
+  top:5em;
+  padding-left: 10px
+
+}
+.PokimonDetailsCard:hover {
+  box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
+}
+
+.pokimonImg{
+  width: 150px;
+  height: 150px
+}
+
+.statbar{
+  margin-top: 3%;
+  margin-left: 4%
+
+}
+ul{
+  padding-left: 0;
+}

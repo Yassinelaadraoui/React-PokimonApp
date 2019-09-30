@@ -1,33 +1,40 @@
 import React from 'react';
 //import './Header.css';
 
-function Header(props) {
-    var searchInput='';
+class Header extends React.Component {
 
-      console.log(props.searchInput);
-
-
-
-//
-//  props.searchInput = '';
-  const handleChange = function (event){
-    searchInput = event.target.value;
+  constructor(props){
+    super(props);
+    this.state = {
+      searchInput : ''
+    }
+    this.handleChange = this.handleChange.bind(this);
 
   }
-    const sendData = () => {
-         props.parentCallback(searchInput);
-    }
+
+  handleChange(event){
+
+    this.setState({ searchInput: event.target.value});
+    this.sendData()
+
+  }
+  sendData = () =>  {
+          
+         this.props.parentCallback(this.state.searchInput);
+  }
+  render(){
     return(
 
-      <nav className="navbar crimson">
-          <a href=""  className="navbar-brand align-middle">Navbar</a>
-          <form className="form-inline align-middle">
-            <input value={searchInput}  onChange={sendData} className="form-control mr-sm-2 align-middle" type="search" placeholder="Search" aria-label="Search" />
+      <nav className="navbar crimson w3-cell-row ">
+          <a href=""  className="navbar-brand w3-center w3-container w3-cell">Navbar</a>
+          <form className="form-inline  w3-right w3-container w3-cell">
+            <input value={this.state.searchInput}  onChange={this.handleChange} className="form-control mr-sm-2 align-middle" type="text" placeholder="Search" aria-label="Search" />
             <button className="btn btn-outline-success my-2 my-sm-0 align-middle" type="submit">Search</button>
           </form>
       </nav>
 
     )
+  }
 
 
 }
